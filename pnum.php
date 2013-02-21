@@ -1,6 +1,6 @@
 <?php
 /*
- * Pnum 1.3
+ * Pnum 1.3, modified by silence150
  *
  * Levonline made this class so you can verify Swedish
  * personal and company numbers.
@@ -125,11 +125,19 @@
  *    numbers and removes them.
  *    We discourage outside use of this function.
  *
+ * function format($pnum)
+ *    Return: (string) formatted 10-digit person number 
+ *    with dash. Does not take into account that the "-"
+ *    should sometimes be a "+", but I was too lazy to 
+ *    implement this (I did not need it myself). Probably 
+ *    doesn't handle errors very well... 
+ *
  *
  * AUTHORS
  * =======
  *
  * Emil Vikstrom
+ * Josef Ottosson
  *
  */
 
@@ -230,5 +238,10 @@ class Pnum {
          $pnum = substr($pnum, 2);
       }
       return $pnum;
+   }
+   
+   public static function format($pnum) {
+     $pnum = self::filter($pnum);
+     return substr($pnum, 0, 6) . '-' . substr($pnum, -4);
    }
 }
